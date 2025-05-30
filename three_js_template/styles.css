@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #36454F; /* 灰蓝色背景 */
+}
+canvas { display: block; }
+.part-info-container {
+    position: absolute;
+    pointer-events: none; /* 允许鼠标事件穿透到 Three.js 场景 */
+
+}
+.part-info {
+    background-color: #E0FFFF; /* 白蓝色背景 */
+    color: black; /* 信息文字颜色改为黑色，更清晰 */
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+    position: absolute;
+    transform: translate(-50%, -120%); /* 默认显示在上方 */
+    border: 1px solid white; /* 细白色边框 */
+}
+.part-info.hidden {
+    display: none;
+}
+h1 { /* 针对 <h1> 标签的样式 */
+    color: white; /* 设置字体颜色为白色 */
+    text-align: center; /* 设置文本居中对齐 */
+}
+.part-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    font-size: 10px;
+}
+.part-info-table th, .part-info-table td {
+    border: 1px solid #ccc;
+    padding: 2px;
+    text-align: left;
+}
+.part-info-table th {
+    background-color: #f0f0f0;
+}
