@@ -58,11 +58,14 @@ def send_mail(creds,
 def work():
     # Gmail API 范围（用于发送邮件）
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
+        
+    token_file= 'token_drive_mail.json'
+    client_secret = 'token_drive_mail.json'
 
     # ---------------------
     # 1. 授权 Gmail API
     # ---------------------
-    creds = tga.get_token(SCOPES)
+    creds = tga.get_token(SCOPES=SCOPES, token_file=token_file, client_secret=client_secret)
     send_mail(creds=creds)
 
 if __name__=='__main__':
