@@ -9,20 +9,24 @@ import os
 SCOPES = ['https://www.googleapis.com/auth/drive',
           'https://www.googleapis.com/auth/gmail.send']# only send
 
-def get_token(SCOPES=SCOPES):
+token_file= 'token_drive_mail.json'
+
+client_secret = 'token_drive_mail.json'
+
+def get_token(SCOPES=SCOPES, token_file=token_file, client_secret=client_secret):
     creds = None
-    if os.path.exists('token_drive_mail.json'):
-        creds = Credentials.from_authorized_user_file('token_drive_mail.json', SCOPES)
+    if os.path.exists(token_file):
+        creds = Credentials.from_authorized_user_file(client_secret, SCOPES)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             # 第一次运行会弹出浏览器登录 Google 账号
-            flow = InstalledAppFlow.from_client_secrets_file('client_secret.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(client_secret, SCOPES)
             creds = flow.run_local_server(port=0)
             
     # 保存登录凭证
-    with open('token_drive_mail.json', 'w') as token:
+    with open(token_file, 'w') as token:
         token_get = creds.to_json()
         token.write(token_get)
     return creds
