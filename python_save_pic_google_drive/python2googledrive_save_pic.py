@@ -39,7 +39,7 @@ def work(file_name= 'image.jpg'):
     # ---------------------
     # 1. 授权 Gmail API
     # ---------------------
-    creds = tga.get_token(SCOPES)
+    creds = tga.get_token(SCOPES=SCOPES, token_file=token_file, client_secret=client_secret)
 
     # 要上传的文件
     file_name = 'image.jpg'
