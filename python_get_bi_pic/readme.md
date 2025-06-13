@@ -7,4 +7,4 @@
 
 files:
 1. only to get powerbi auth.json by pwaywright; auth_json_BI_only.py
-2. api to use: 
+2. api to use: get_BI_pic_python.py
