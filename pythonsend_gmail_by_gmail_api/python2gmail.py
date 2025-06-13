@@ -7,7 +7,7 @@ import tooken_google_api as tga
 
 def send_mail(creds,
               subject='C11 SPC DAILY REPORT', 
-              content='hello', 
+              content='Hi,\nPlease find below C11 SPC ALARM DAILY REPORT', 
               image_url_list =['image.jpg'], 
               image_desc_list =['',],
               receivers_list=['caren.kan@ap.averydennison.com']):
@@ -29,8 +29,10 @@ def send_mail(creds,
     message.add_alternative(f"""
     <html>
     <body>
-        <p>test</p>
+        <p>Hi,<br>Please find below C11 SPC ALARM DAILY REPORT.</p>
         <img src="cid:{image_cid}" width="1000" stype="max-width:100%; height:auto;">
+        <br><br>
+        <p>BR.<br>Caren Kan</p>
     </body>
     </html>
     """, subtype='html')
@@ -55,18 +57,26 @@ def send_mail(creds,
 
     print("✅ 邮件已发送，ID:", send_result['id'])
 
-def work():
+def work(subject='C11 SPC DAILY REPORT',
+         content='Hi,\nPlease find below C11 SPC ALARM DAILY REPORT',
+         image_url_list =['image.jpg'],
+         image_desc_list =['',],
+        receivers_list=['caren.kan@ap.averydennison.com']
+        ):
     # Gmail API 范围（用于发送邮件）
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-        
-    token_file= 'token_drive_mail.json'
-    client_secret = 'token_drive_mail.json'
 
     # ---------------------
     # 1. 授权 Gmail API
     # ---------------------
-    creds = tga.get_token(SCOPES=SCOPES, token_file=token_file, client_secret=client_secret)
-    send_mail(creds=creds)
+    creds = tga.get_token(SCOPES)
+    
+    send_mail(creds=creds,
+              subject=subject, 
+              content=content, 
+              image_url_list =image_url_list, 
+              image_desc_list =image_desc_list,
+              receivers_list=receivers_list)
 
 if __name__=='__main__':
     work()
