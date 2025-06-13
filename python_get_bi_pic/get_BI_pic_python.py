@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 import base64
-import template_send_googlmail as sg
+import python2gmail_by_api as pba
 
 # === 可配置参数 ===
 PBI_URL = "https://app.powerbi.com/groups/6bfcff47-831c-42f4-9b91-698f09603fb6/reports/b32fa71a-f310-4ab0-aa0b-e7866c9a1477/74c669750ae2fb0ddc9b?experience=power-bi"
@@ -78,11 +78,19 @@ def capture_report():
             page.screenshot(path=SCREENSHOT_PATH, full_page=True)
             content = page.query_selector("div.visualContainerHost")
             if content:
-                content.screenshot(path='content.png')
+                image_file = 'image.jpg'
+                content.screenshot(path=image_file)
                 #content_byte = content.screenshot()
                 #base64 str
                 #pic_base64 = base64.b64encode(content_byte).decode('utf-8')
                 #print('pic_base64',pic_base64)
+                #send to gmail!!!
+                pba.work(subject='C11 SPC DAILY REPORT',
+                content='Hi,\nPlease find below C11 SPC ALARM DAILY REPORT',
+                image_url_list =[image_file],
+                image_desc_list =['',],
+                receivers_list=['caren.kan@ap.averydennison.com']
+                )
                 #sg.work(df_list=['',],pic_url_list=['',],pic_description_list=["pic_test"],pic_base64str_list=[pic_base64])
 
 
